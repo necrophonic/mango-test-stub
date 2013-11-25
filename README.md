@@ -6,6 +6,16 @@ Simple stubbing for mango queries in unit tests
 Supports
 --------
 
+**Collection**
+
   - find_one
   - find
+
+**Cursor**
+
+  - all
+  - count
+  - next
+
+
 
