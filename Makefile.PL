@@ -18,10 +18,12 @@ WriteMakefile(
 	},
 	TEST_REQUIRES => {
 		"Test::More" 	  => '0.99',
-		"Test::Exception" => '0.32'
+		"Test::Exception" => '0.32',
+		"Test::Spec"	  => '0.47',
 	},
 	test 			=> {
 		TESTS	=> 't/*.t'
 	},
 	'dist'          => { COMPRESS => "gzip -9", SUFFIX => "gz" },
 );
+
