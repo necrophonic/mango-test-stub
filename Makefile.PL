@@ -14,6 +14,7 @@ WriteMakefile(
 	LICENSE		=> 'artistic_2',
 	PREREQ_PM	=> {
 		'Readonly' 	   => '1.03',
+		'Mango'		   => '0.17',
 	},
 	TEST_REQUIRES => {
 		"Test::More" 	  => '0.99',
