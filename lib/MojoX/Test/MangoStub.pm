@@ -6,16 +6,22 @@ use warnings;
 
 our $VERSION = 0.1;
 
-use Mango; # Bit useless if you don't actually have mango
+require 'Mango.pm'; # Bit useless if you don't actually have mango
 use MojoX::Test::MangoStub::FakeData;
 use MojoX::Test::MangoStub::DB;
 use MojoX::Test::MangoStub::Collection;
 
 $MojoX::Test::MangoStub::data = MojoX::Test::MangoStub::FakeData->new;
 
-{
-	no warnings 'redefine';
-	eval( q|*Mango::db = sub{state $db = MojoX::Test::MangoStub::DB->new}| );
+# If we're running with Test::Spec and in appropriate context
+# then use Test::Spec::Mocks to do our monkey patching.
+if (exists $INC{'Test/Spec.pm'} && Test::Spec->current_context) {
+	use warnings 'redefine';
+	Mango->expects('db')->returns( state $db = MojoX::Test::MangoStub::DB->new);
+}
+else {
+ 	no warnings 'redefine';
+ 	eval( q|*Mango::db = sub{state $db = MojoX::Test::MangoStub::DB->new}| );
 }
 
 1;
@@ -25,6 +31,27 @@ __END__
 =head1 TITLE
 
 MojoX::Test::MangoStub
+
+=head1 SYNOPSIS
+
+  # Using Test::More
+  #
+  use Test::More;
+  use MojoX::Test::MangoStub; # Stubs in effect!
+  # ...
+  done_testing();
+
+
+  # Using Test::Spec (uses Test::Spec::Mocks)
+  #
+  use Test::Spec;
+
+  describe "Whilst stubbing Mango" => {
+    require MojoX::Test::MangoStub; # Stubs in effect in scope!
+    # ...
+  };
+  runtests unless caller;
+
 
 =head1 DESCRIPTION
 
