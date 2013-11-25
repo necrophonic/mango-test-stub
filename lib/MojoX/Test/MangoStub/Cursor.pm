@@ -4,23 +4,44 @@ use v5.10;
 use strict;
 use warnings;
 
-sub new { bless {}, shift }
+sub new { bless {index=>0}, shift }
 
 sub all {
-	# TODO
+	my ($self, $cb) = @_;
+
+	my $err = ''; # TODO
+	my $docs = $MojoX::Test::MangoStub::data->{collection};
+
+	return $cb->($self,$err,$docs) if $cb;
+	return $docs;
 }
 
 # ------------------------------------------------------------------------------
 
+# Naive "next" - simply iterate through the docs in the defined test data
 sub next {
-	# TODO
+	my ($self, $cb) = @_;
+
+	my $err = ''; # TODO
+	my $doc = $MojoX::Test::MangoStub::data->{collection}->[$self->{index}++];
+
+	return $cb->($self,$err,$doc) if $cb;
+	return $doc;
 }
 
 # ------------------------------------------------------------------------------
 
 sub count {
-	# TODO
+	my ($self,$cb) = @_;
+
+	my $err = ''; # TODO
+	my $count = scalar @{$MojoX::Test::MangoStub::data->{collection}};
+
+	return $cb->($self,$err,$count) if $cb;
+	return $count;
 }
+
+# ------------------------------------------------------------------------------
 
 1;
 
