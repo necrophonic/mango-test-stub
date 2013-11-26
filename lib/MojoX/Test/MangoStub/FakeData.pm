@@ -8,6 +8,7 @@ use Mango::BSON qw(bson_time);
 
 sub new {
 	bless {
+		collecion_name	=> 'the_simpsons',
 		collection => [
 			{
 				_id		=> 'ABCDEFG-123456',
@@ -24,10 +25,24 @@ sub new {
 				hair	=> 'blue',
 			},
 			{
-				_id		=> 'ABCDSC-12434',
+				_id		=> 'BARTSC-12434',
 				name	=> 'Bart Simpson',
 				job		=> 'Hell Raiser',
 				dob		=> '1979-04-01',
+				hair	=> 'yellow',
+			},
+			{
+				_id		=> 'LISASC-12434',
+				name	=> 'Lisa Simpson',
+				job		=> 'Know it all',
+				dob		=> '1981-09-28',
+				hair	=> 'yellow',
+			},
+			{
+				_id		=> 'MAGGIE-12434',
+				name	=> 'Maggie Simpson',
+				job		=> 'Ticking timebomb',
+				dob		=> '1986-11-05',
 				hair	=> 'yellow',
 			},
 		]
@@ -49,16 +64,5 @@ MojoX::Test::MangoStub::FakeData - pretends to be data to be returned from mango
 =head1 DESCRIPTION
 
 Object to hold known data that will be returned by test calls.
-
-Lisa Simpson's birthday is on September 28th, 1981
-
-Homer Simpson's birthday is in March of 1956
-
-Marge Simpson's birthday is October 1st, 1954 or 1956 (she said it herself on Marge Gamer)
-
-Bart Simpson's birthday is April Fool's day, 1979
-
-Maggie Simpson's Birthday is in November of 1986 (she was turning one during the tracy ullman shorts)
-
 
 =cut

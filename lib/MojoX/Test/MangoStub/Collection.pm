@@ -39,6 +39,41 @@ sub find {
 
 # ------------------------------------------------------------------------------
 
+sub full_name {
+	return $MojoX::Test::MangoStub::data->{collection_name};	
+}
+
+# ------------------------------------------------------------------------------
+
+sub insert {
+	my ($self, $docs) = (shift,shift);
+
+	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
+
+	# Get how many docs we're "inserting" so we can return the right number of oids
+	my $num_docs = 1;
+	if (ref $docs eq 'ARRAY') {
+		$num_docs = scalar @$docs;
+	}
+
+	my $err = '';  # TODO
+
+	# TODO insert the given docs into the current fake data
+	# ...
+	# ...
+
+	# TODO customise format of returned ID?
+	my $oids = [];
+	for (1..$num_docs) {
+		push @$oids, int rand(100000000000);
+	}
+
+	my $return_oids = $num_docs==1 ? $oids->[0] : $oids;
+
+	return $cb->($self,$err,$return_oids) if $cb;
+	return $return_oids;
+}
+
 1;
 
 __END__
