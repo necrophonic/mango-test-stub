@@ -10,6 +10,8 @@ Supports
 
   - find_one
   - find
+  - full_name
+  - insert
 
 **Cursor**
 
