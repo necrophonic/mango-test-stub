@@ -15,14 +15,11 @@ WriteMakefile(
 	PREREQ_PM	=> {
 		'Readonly' 	   => '1.03',
 		'Mango'		   => '0.17',
+
+		"Test::More" 	  => '0.99',
+		"Test::Exception" => '0.32',
+		"Test::Spec"	  => '0.47',
 	},	
-	META_MERGE => {
-        test_requires => {
-            "Test::More" 	  => '0.99',
-			"Test::Exception" => '0.32',
-			"Test::Spec"	  => '0.47',
-        },
-    },
 	test 			=> {
 		TESTS	=> 't/*.t'
 	},
