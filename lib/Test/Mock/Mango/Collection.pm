@@ -50,25 +50,25 @@ sub insert {
 
 	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 
+	my $oids 		= [];
+	my $err  		= '';  # TODO
+	my $return_oids = '';
+
 	# Get how many docs we're "inserting" so we can return the right number of oids
 	my $num_docs = 1;
 	if (ref $docs eq 'ARRAY') {
 		$num_docs = scalar @$docs;
+		for (0..$num_docs-1) {
+			push @$oids, $docs->[$_]->{_id} ||= sprintf("%010s", int rand(1000000000));
+			push @{$Test::Mock::Mango::data->{collection}}, $docs->[$_];
+		}
+		$return_oids = $oids;
 	}
-
-	my $err = '';  # TODO
-
-	# TODO insert the given docs into the current fake data
-	# ...
-	# ...
-
-	# TODO customise format of returned ID?
-	my $oids = [];
-	for (1..$num_docs) {
-		push @$oids, int rand(100000000000);
+	else {
+		push @$oids, $docs->{_id} ||= sprintf("%010s", int rand(1000000000));
+		push @{$Test::Mock::Mango::data->{collection}}, $docs;
+		$return_oids = $oids->[0];
 	}
-
-	my $return_oids = $num_docs==1 ? $oids->[0] : $oids;
 
 	return $cb->($self,$err,$return_oids) if $cb;
 	return $return_oids;
@@ -93,5 +93,9 @@ Simulated mango collection for unit testing as part of L<Test::Mock::Mango>.
 =item * find_one
 
 =item * find
+
+=item * insert
+
+=item * full_name
 
 =back
