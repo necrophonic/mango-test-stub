@@ -7,8 +7,8 @@ use Config;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-	NAME		=> 'MojoX-Test-MangoStub',
-	VERSION_FROM	=> 'lib/MojoX/Test/MangoStub.pm',
+	NAME		=> 'Test-Mock-Mango',
+	VERSION_FROM	=> 'lib/Test/Mock/Mango.pm',
 	ABSTRACT	=> 'Simple stubbing for Mango to allow unit tests for code that uses it',
 	AUTHOR		=> 'J Gregory <john@johngregory.me.uk>',
 	LICENSE		=> 'artistic_2',
