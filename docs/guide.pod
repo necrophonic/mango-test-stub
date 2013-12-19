@@ -1,10 +1,10 @@
 =pod
 
-=head1 TITLE
+=head1 Test::Mock::Mango
 
-Test::Mock::Mango - User Guide
+User Guide
 
-=head1 FAKE DATABASE
+=head1 Fake Database
 
 To support returned I<something vaguely sensible> and, more importantly, I<known data>
 from calls, C<Test::Mock::Mango> contains a I<fake database>.
@@ -21,7 +21,7 @@ The new state will now be used for subsequent method calls.
 
 
 
-=head1 MOCKED METHODS
+=head1 Mocked Methods
 
 =head2 Collection
 
