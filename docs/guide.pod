@@ -39,7 +39,7 @@ to perform any real query.
 =head3 full_name
 
 Returns the name of the current fake collection, as given by
-C<$Test::Mock::Mango::FakeData->{collection_name}>.
+C<$Test::Mock::Mango::FakeData-E<gt>{collection_name}>.
 
 
 =head3 insert
@@ -69,4 +69,4 @@ Naive iterate through the current fake collection. To reset the index, call:
 
 Return the number of documents currently in the fake collection.
 
-=end
+
