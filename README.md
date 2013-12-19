@@ -1,4 +1,4 @@
-Mojox::Test::MangoStub [![Build Status](https://travis-ci.org/necrophonic/mango-test-stub.png?branch=master)](https://travis-ci.org/necrophonic/mango-test-stub.png)
+Test::Mock::Mango [![Build Status](https://travis-ci.org/necrophonic/test-mock-mango.png?branch=master)](https://travis-ci.org/necrophonic/test-mock-mango.png)
 ======================
 
 Simple stubbing for mango queries in unit tests
