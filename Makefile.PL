@@ -15,6 +15,8 @@ WriteMakefile(
 	PREREQ_PM	=> {
 		'Readonly' 	   => '1.03',
 		'Mango'		   => '0.17',
+	},
+	BUILD_REQUIRES => {
 
 		"Test::More" 	  => '0.99',
 		"Test::Exception" => '0.32',
