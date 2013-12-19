@@ -3,11 +3,11 @@
 use Test::More;
 use Mango;
 
-use MojoX::Test::MangoStub;
-use MojoX::Test::MangoStub::Cursor;
+use Test::Mock::Mango;
+use Test::Mock::Mango::Cursor;
 
 subtest "Blocking syntax" => sub {
-	my $cursor = MojoX::Test::MangoStub::Cursor->new;
+	my $cursor = Test::Mock::Mango::Cursor->new;
 	is($cursor->next->{name}, 'Homer Simpson', 'Get next doc');
 	is($cursor->next->{name}, 'Marge Simpson', 'Get next doc');
 	is($cursor->next->{name}, 'Bart Simpson',  'Get next doc');
@@ -18,7 +18,7 @@ subtest "Blocking syntax" => sub {
 
 
 subtest "Non blocking syntax" => sub {
-	my $cursor = MojoX::Test::MangoStub::Cursor->new;
+	my $cursor = Test::Mock::Mango::Cursor->new;
 
 	$cursor->next( sub {
 		my ($self,$err,$doc) = @_;

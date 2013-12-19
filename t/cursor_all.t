@@ -3,12 +3,12 @@
 use Test::Spec;
 use Mango;
 
-use MojoX::Test::MangoStub;
-use MojoX::Test::MangoStub::Cursor;
+use Test::Mock::Mango;
+use Test::Mock::Mango::Cursor;
 
 describe "Using cursor->all" => sub {
 
-	my $cursor = MojoX::Test::MangoStub::Cursor->new;
+	my $cursor = Test::Mock::Mango::Cursor->new;
 
 	describe "with blocking syntax" => sub {
 

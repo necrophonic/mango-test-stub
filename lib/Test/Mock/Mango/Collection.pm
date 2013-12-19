@@ -1,10 +1,10 @@
-package MojoX::Test::MangoStub::Collection;
+package Test::Mock::Mango::Collection;
 
 use v5.10;
 use strict;
 use warnings;
 
-use MojoX::Test::MangoStub::Cursor;
+use Test::Mock::Mango::Cursor;
 
 sub new { bless {}, shift }
 
@@ -18,7 +18,7 @@ sub find_one {
 	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 	
 	# Return the first fake document
-	my $doc = $MojoX::Test::MangoStub::data->{collection}->[0];
+	my $doc = $Test::Mock::Mango::data->{collection}->[0];
 
 	my $err = ''; # TODO
 
@@ -33,14 +33,14 @@ sub find_one {
 # ------------------------------------------------------------------------------
 
 sub find {	
-	return MojoX::Test::MangoStub::Cursor->new; # Not actually passing any values
+	return Test::Mock::Mango::Cursor->new; # Not actually passing any values
 												# through as we're not using them :-p
 }
 
 # ------------------------------------------------------------------------------
 
 sub full_name {
-	return $MojoX::Test::MangoStub::data->{collection_name};	
+	return $Test::Mock::Mango::data->{collection_name};	
 }
 
 # ------------------------------------------------------------------------------
@@ -80,11 +80,11 @@ __END__
 
 =head1 TITLE
 
-MojoX::Test::MangoStub::Collection - fake Mango::Collection
+Test::Mock::Mango::Collection - fake Mango::Collection
 
 =head1 DESCRIPTION
 
-Simulated mango collection for unit testing as part of L<MojoX::Test::MangoStub>.
+Simulated mango collection for unit testing as part of L<Test::Mock::Mango>.
 
 =head1 SUPPORTED METHODS
 

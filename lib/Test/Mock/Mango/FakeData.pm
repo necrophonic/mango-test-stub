@@ -1,4 +1,4 @@
-package MojoX::Test::MangoStub::FakeData;
+package Test::Mock::Mango::FakeData;
 
 use v5.10;
 use strict;
@@ -55,11 +55,11 @@ __END__
 
 =head1 TITLE
 
-MojoX::Test::MangoStub::FakeData - pretends to be data to be returned from mango calls
+Test::Mock::Mango::FakeData - pretends to be data to be returned from mango calls
 
 =head1 SYNOPSIS
 
-  my $data = MojoX::Test::MangoStub::FakeData->new;
+  my $data = Test::Mock::Mango::FakeData->new;
 
 =head1 DESCRIPTION
 

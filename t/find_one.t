@@ -3,7 +3,7 @@
 use Test::More;
 use Mango;
 
-use MojoX::Test::MangoStub;
+use Test::Mock::Mango;
 
 my $mango = Mango->new('mongodb://localhost:123456'); # FAKE!
 

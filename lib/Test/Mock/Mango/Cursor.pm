@@ -1,4 +1,4 @@
-package MojoX::Test::MangoStub::Cursor;
+package Test::Mock::Mango::Cursor;
 
 use v5.10;
 use strict;
@@ -10,7 +10,7 @@ sub all {
 	my ($self, $cb) = @_;
 
 	my $err = ''; # TODO
-	my $docs = $MojoX::Test::MangoStub::data->{collection};
+	my $docs = $Test::Mock::Mango::data->{collection};
 
 	return $cb->($self,$err,$docs) if $cb;
 	return $docs;
@@ -23,7 +23,7 @@ sub next {
 	my ($self, $cb) = @_;
 
 	my $err = ''; # TODO
-	my $doc = $MojoX::Test::MangoStub::data->{collection}->[$self->{index}++];
+	my $doc = $Test::Mock::Mango::data->{collection}->[$self->{index}++];
 
 	return $cb->($self,$err,$doc) if $cb;
 	return $doc;
@@ -35,7 +35,7 @@ sub count {
 	my ($self,$cb) = @_;
 
 	my $err = ''; # TODO
-	my $count = scalar @{$MojoX::Test::MangoStub::data->{collection}};
+	my $count = scalar @{$Test::Mock::Mango::data->{collection}};
 
 	return $cb->($self,$err,$count) if $cb;
 	return $count;
@@ -49,11 +49,11 @@ __END__
 
 =head1 TITLE
 
-MojoX::Test::MangoStub::Cursor - fake Mango::Cursor
+Test::Mock::Mango::Cursor - fake Mango::Cursor
 
 =head1 DESCRIPTION
 
-Simulated mango cursor for unit testing as part of L<MojoX::Test::MangoStub>.
+Simulated mango cursor for unit testing as part of L<Test::Mock::Mango>.
 
 =head1 SUPPORTED METHODS
 
