@@ -60,21 +60,64 @@ simply return the data set in the FakeData object. To run a test you need to set
 up the data you expect back first - this module doesn't test your queries, it allows
 you to test around mango calls with known conditions.
 
-Non-blocking ops are not actually non blocking but simply execute your callback
-straight away as there's nothing to actually go off and do on an event loop.
-
 
 =head1 Stubbed Methods
 
 The following methods are available on each faked part of the mango. We
 describe here briefly how far each actually simulates the real method.
 
+Each method supports blocking and non-blocking syntax if the original
+method does. Non-blocking ops are not actually non blocking but simply
+execute your callback straight away as there's nothing to actually go off
+and do on an event loop.
+
 =head2 Collection
+
+L<Test::Mock::Mango::Collection>
 
 =head3 find_one
 
 Ignores query. Returns the first document from the current fake collection
 given in L<Test::Mock::Mango::FakeData>. Returns undef if the collection
 is empty.
+
+=head3 find
+
+Ignores query. Returns a new L<Test::Mock::Mango::Cursor> instance.
+
+=head3 full_name
+
+Returns full name of the fake collection.
+
+=head3 insert
+
+Naively inserts the given doc(s) onto the end of the current fake collection.
+
+Returns an C<oid> for each inserted document. If an C<_id> is specifiec
+in the inserted doc then it is returned, otherwise a random string is
+returned instead.
+
+
+=head2 Cursor
+
+L<Test::Mock::Mango::Cursor>
+
+=head3 all
+
+Return array ref containing all the documents in the current fake collection.
+
+=head3 next
+
+Simulates a cursor by (beginning at zero) iterating through each document
+on successive calls. Won't reset itself. If you want to reset the
+cursor then set C<Test::Mock::Mango->index> to zero.
+
+=head3 count
+
+Returns the number of documents in the current fake collection.
+
+=head3 backlog
+
+Arbitarily returns 'C<2>'
 
 =cut
