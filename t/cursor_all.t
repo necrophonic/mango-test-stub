@@ -1,39 +1,22 @@
 #!/usr/bin/env perl
 
-use Test::Spec;
+use Test::More tests => 2;
 use Mango;
 
 use Test::Mock::Mango;
 use Test::Mock::Mango::Cursor;
 
-describe "Using cursor->all" => sub {
+my $cursor = Test::Mock::Mango::Cursor->new;
 
-	my $cursor = Test::Mock::Mango::Cursor->new;
-
-	describe "with blocking syntax" => sub {
-
-		my $docs;
-
-		before sub {
-			$docs = $cursor->all;
-		};
-
-		it "should return an array ref" => sub {
-			is(ref $docs, 'ARRAY');
-		};
-
-	};
-
-	describe "with non-blocking syntax" => sub {
-
-		$cursor->all( sub {
-			my ($cursor, $err, $docs) = @_;
-			it "should return an array ref" => sub {
-				is(ref $docs, 'ARRAY');
-			};
-		});
-	};
-
+subtest 'cursor->all with blocking syntax' => sub {
+	is( ref $cursor->all, 'ARRAY', 'returns array ref' );
 };
 
-runtests unless caller;
+subtest 'cursor->all with non-blocking syntax' => sub {
+	$cursor->all(sub {
+		my ($cursor, $err, $docs) = @_;
+		is( ref $docs, 'ARRAY', 'returns array ref' );
+	});
+};
+
+done_testing();

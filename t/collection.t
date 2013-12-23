@@ -1,17 +1,16 @@
 #!/usr/bin/env perl
 
-use Test::Spec;
+use Test::More;
 use Mango;
 
 use_ok 'Test::Mock::Mango::Collection';
 
-describe 'Collection' => sub {
+subtest 'Collection' => sub {
 
 	my $collection = Test::Mock::Mango::Collection->new;
 
-	it 'should define "find", "find_one", "full_name" and "insert" methods' => sub {
-		can_ok( $collection, qw|find find_one full_name insert|);
-	};
+	can_ok $collection, (qw|find find_one full_name insert|);
+
 };
 
-runtests;
+done_testing();

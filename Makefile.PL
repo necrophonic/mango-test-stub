@@ -17,10 +17,8 @@ WriteMakefile(
 		'Mango'		   => '0.17',
 	},
 	BUILD_REQUIRES => {
-
 		"Test::More" 	  => '0.99',
 		"Test::Exception" => '0.32',
-		"Test::Spec"	  => '0.47',
 	},	
 	test 			=> {
 		TESTS	=> 't/*.t'
