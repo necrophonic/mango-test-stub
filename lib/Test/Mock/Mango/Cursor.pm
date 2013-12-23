@@ -43,26 +43,21 @@ sub count {
 
 # ------------------------------------------------------------------------------
 
+sub backlog {
+	my ($self) = @_;
+	return 2; # Arbitary for a valid call
+}
+
 1;
 
 __END__
 
-=head1 TITLE
+=head1 Title
 
 Test::Mock::Mango::Cursor - fake Mango::Cursor
 
-=head1 DESCRIPTION
+=head1 Description
 
 Simulated mango cursor for unit testing as part of L<Test::Mock::Mango>.
 
-=head1 SUPPORTED METHODS
-
-=over
-
-=item * all
-
-=item * next
-
-=item * count
-
-=back
+=cut

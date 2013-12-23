@@ -18,14 +18,10 @@ sub find_one {
 	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 	
 	# Return the first fake document
-	my $doc = $Test::Mock::Mango::data->{collection}->[0];
+	my $doc = $Test::Mock::Mango::data->{collection}->[0] || undef;
 
 	my $err = ''; # TODO
 
-	unless($doc) {
-		die "Fake find_one failed - need at least one document set in fake data collection\n\n";
-	}
-	
 	return $cb->($self, $err, $doc) if $cb;	# Non blocking
 	return $doc;							# Blocking
 }
@@ -34,7 +30,7 @@ sub find_one {
 
 sub find {	
 	return Test::Mock::Mango::Cursor->new; # Not actually passing any values
-												# through as we're not using them :-p
+										   # through as we're not using them :-p
 }
 
 # ------------------------------------------------------------------------------
@@ -78,24 +74,12 @@ sub insert {
 
 __END__
 
-=head1 TITLE
+=head1 Title
 
 Test::Mock::Mango::Collection - fake Mango::Collection
 
-=head1 DESCRIPTION
+=head1 Description
 
 Simulated mango collection for unit testing as part of L<Test::Mock::Mango>.
 
-=head1 SUPPORTED METHODS
-
-=over
-
-=item * find_one
-
-=item * find
-
-=item * insert
-
-=item * full_name
-
-=back
+=cut

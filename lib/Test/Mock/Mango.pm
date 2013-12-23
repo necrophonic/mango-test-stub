@@ -28,11 +28,11 @@ else {
 
 __END__
 
-=head1 TITLE
+=head1 Title
 
 Test::Mock::Mango
 
-=head1 SYNOPSIS
+=head1 Synopsis
 
   # Using Test::More
   #
@@ -53,7 +53,7 @@ Test::Mock::Mango
   runtests unless caller;
 
 
-=head1 DESCRIPTION
+=head1 Description
 
 Simple stubbing of mango methods. Methods ignore actual queries being entered and
 simply return the data set in the FakeData object. To run a test you need to set
@@ -62,5 +62,19 @@ you to test around mango calls with known conditions.
 
 Non-blocking ops are not actually non blocking but simply execute your callback
 straight away as there's nothing to actually go off and do on an event loop.
+
+
+=head1 Stubbed Methods
+
+The following methods are available on each faked part of the mango. We
+describe here briefly how far each actually simulates the real method.
+
+=head2 Collection
+
+=head3 find_one
+
+Ignores query. Returns the first document from the current fake collection
+given in L<Test::Mock::Mango::FakeData>. Returns undef if the collection
+is empty.
 
 =cut

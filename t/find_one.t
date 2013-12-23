@@ -36,4 +36,14 @@ $mango->db('foo')->collection('bar')->find_one( {some => 'query'}, sub {
 		);
 	});
 
+
+
+subtest 'Empty collection returns undef' => sub {
+	# Empty fake collection
+	$Test::Mock::Mango::data->{collection} = [];
+
+	my $doc = $mango->db('foo')->collection('bar')->find_one( {some => 'query'} );
+	is($doc, undef, 'returns undef as expected');
+};
+
 done_testing();
