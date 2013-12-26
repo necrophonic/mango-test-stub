@@ -9,7 +9,10 @@ subtest 'Collection' => sub {
 
 	my $collection = Test::Mock::Mango::Collection->new;
 
-	can_ok $collection, (qw|find find_one full_name insert|);
+	can_ok $collection, (qw|
+		aggregate create drop
+		find find_one full_name insert
+	|);
 
 };
 

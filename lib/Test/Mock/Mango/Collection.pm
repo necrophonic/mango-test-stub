@@ -8,6 +8,55 @@ use Test::Mock::Mango::Cursor;
 
 sub new { bless {}, shift }
 
+# aggregate
+#
+# Fake an "aggregated result" by returning the current fake collection
+#
+sub aggregate {
+	my $self = shift;
+	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
+
+	my $err = ''; # TODO
+	my $docs = $Test::Mock::Mango::data->{collection};
+
+	return $cb->($self,$err,$docs) if $cb;
+	return $docs;
+}
+
+# ------------------------------------------------------------------------------
+
+# create
+#
+# Doesn't do anything. Just return with or without error as specified
+#
+sub create {
+	my $self = shift;
+	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
+
+	my $err = ''; # TODO
+
+	return $cb->($self,$err) if $cb;
+	return;
+}
+
+# ------------------------------------------------------------------------------
+
+# drop
+#
+# Doesn't do anything. Just return with or without error as specified
+#
+sub drop {
+	my $self = shift;
+	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
+
+	my $err = ''; # TODO
+
+	return $cb->($self,$err) if $cb;
+	return;	
+}
+
+# ------------------------------------------------------------------------------
+
 # find_one
 #
 # By default we return the first document from the fake data collection

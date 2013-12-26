@@ -1,0 +1,13 @@
+2013-12-23 0.01
+	Currently stubs:
+		- Collection->insert
+		- Collection->find
+		- Collection->find_one
+		- Collection->full_name
+		- Collection->aggregate
+		- Collection->create
+		- Collection->drop
+		- Cursor->backlog
+		- Cursor->next
+		- Cursor->all
+		- Cursor->count

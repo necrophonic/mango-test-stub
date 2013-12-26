@@ -71,9 +71,25 @@ method does. Non-blocking ops are not actually non blocking but simply
 execute your callback straight away as there's nothing to actually go off
 and do on an event loop.
 
+All methhods by default execute without error state.
+
+
 =head2 Collection
 
 L<Test::Mock::Mango::Collection>
+
+=head3 aggregate
+
+Ignores query. Returns current collection documents to simulate an
+aggregated result.
+
+=head3 create
+
+Doesn't really do anything.
+
+=head3 drop
+
+Doesn't really do anything.
 
 =head3 find_one
 
