@@ -32,6 +32,9 @@ __END__
 
 Test::Mock::Mango
 
+=for html
+<img src="https://travis-ci.org/necrophonic/test-mock-mango.png?branch=master">
+
 =head1 Synopsis
 
   # Using Test::More
