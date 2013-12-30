@@ -12,5 +12,5 @@ lib/Test/Mock/Mango/Collection.pm
 lib/Test/Mock/Mango/Cursor.pm
 lib/Test/Mock/Mango/DB.pm
 lib/Test/Mock/Mango/FakeData.pm
-README.md
+README.pod
 Makefile.PL
