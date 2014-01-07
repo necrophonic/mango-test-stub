@@ -8,7 +8,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
 	NAME			=> 'Test::Mock::Mango',
-	VERSION_FROM	=> 'lib/Test/Mock/Mango.pm',
+	VERSION			=>  '0.01.1',
 	ABSTRACT_FROM	=> 'lib/Test/Mock/Mango.pm',
 	AUTHOR			=> 'J Gregory <john@johngregory.me.uk>',
 	LICENSE			=> 'artistic_2',
