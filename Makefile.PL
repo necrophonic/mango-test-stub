@@ -8,7 +8,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
 	NAME		=> 'Test::Mock::Mango',
-	VERSION		=> '0.01.3',
+	VERSION		=> '0.01.4',
 	ABSTRACT 	=> 'Simple stubbing for Mango to allow unit tests for code that uses it',
 	AUTHOR		=> 'J Gregory <john@johngregory.me.uk>',
 	LICENSE		=> 'artistic_2',
