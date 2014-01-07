@@ -1,4 +1,10 @@
-2013-12-23 0.01
+0.01.1 	2014-01-07
+
+	Minor change to Makefile.PL and move abstract into module
+
+
+0.01  	2013-12-23 0.01
+
 	Currently stubs:
 		- Collection->insert
 		- Collection->find
