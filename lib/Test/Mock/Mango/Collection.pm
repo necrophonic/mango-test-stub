@@ -121,13 +121,13 @@ sub insert {
 
 1;
 
-__END__
+=encoding utf8
 
-=head1 Title
+=head1 NAME
 
 Test::Mock::Mango::Collection - fake Mango::Collection
 
-=head1 Description
+=head1 DESCRIPTION
 
 Simulated mango collection for unit testing as part of L<Test::Mock::Mango>.
 

@@ -51,9 +51,9 @@ sub new {
 
 1;
 
-__END__
+=encoding utf8
 
-=head1 TITLE
+=head1 NAME
 
 Test::Mock::Mango::FakeData - pretends to be data to be returned from mango calls
 

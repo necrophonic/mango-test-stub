@@ -50,13 +50,13 @@ sub backlog {
 
 1;
 
-__END__
+=encoding utf8
 
-=head1 Title
+=head1 NAME
 
 Test::Mock::Mango::Cursor - fake Mango::Cursor
 
-=head1 Description
+=head1 DESCRIPTION
 
 Simulated mango cursor for unit testing as part of L<Test::Mock::Mango>.
 

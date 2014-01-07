@@ -26,16 +26,16 @@ else {
 
 1;
 
-__END__
+=encoding utf8
 
-=head1 Title
+=head1 NAME
 
 Test::Mock::Mango - Simple stubbing for Mango to allow unit tests for code that uses it
 
 =for html
 <a href="https://travis-ci.org/necrophonic/test-mock-mango"><img src="https://travis-ci.org/necrophonic/test-mock-mango.png?branch=master"></a>
 
-=head1 Synopsis
+=head1 SYNOPSIS
 
   # Using Test::More
   #
@@ -56,7 +56,7 @@ Test::Mock::Mango - Simple stubbing for Mango to allow unit tests for code that 
   runtests unless caller;
 
 
-=head1 Description
+=head1 DESCRIPTION
 
 Simple stubbing of mango methods. Methods ignore actual queries being entered and
 simply return the data set in the FakeData object. To run a test you need to set
@@ -64,7 +64,7 @@ up the data you expect back first - this module doesn't test your queries, it al
 you to test around mango calls with known conditions.
 
 
-=head1 Stubbed Methods
+=head1 STUBBED METHODS
 
 The following methods are available on each faked part of the mango. We
 describe here briefly how far each actually simulates the real method.
@@ -138,5 +138,13 @@ Returns the number of documents in the current fake collection.
 =head3 backlog
 
 Arbitarily returns 'C<2>'
+
+=head1 AUTHOR
+
+J Gregory <JGREGORY@CPAN.ORG>
+
+=head1 SEE ALSO
+
+L<Mango>
 
 =cut
