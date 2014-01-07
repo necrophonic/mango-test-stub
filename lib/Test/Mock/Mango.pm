@@ -30,7 +30,7 @@ __END__
 
 =head1 Title
 
-Test::Mock::Mango
+Test::Mock::Mango - Simple stubbing for Mango to allow unit tests for code that uses it
 
 =for html
 <a href="https://travis-ci.org/necrophonic/test-mock-mango"><img src="https://travis-ci.org/necrophonic/test-mock-mango.png?branch=master"></a>
