@@ -7,13 +7,12 @@ use Config;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-	NAME		=> 'Test-Mock-Mango',
+	NAME			=> 'Test::Mock::Mango',
 	VERSION_FROM	=> 'lib/Test/Mock/Mango.pm',
-	ABSTRACT	=> 'Simple stubbing for Mango to allow unit tests for code that uses it',
-	AUTHOR		=> 'J Gregory <john@johngregory.me.uk>',
-	LICENSE		=> 'artistic_2',
-	PREREQ_PM	=> {
-		'Readonly' 	   => '1.03',
+	ABSTRACT_FROM	=> 'lib/Test/Mock/Mango.pm',
+	AUTHOR			=> 'J Gregory <john@johngregory.me.uk>',
+	LICENSE			=> 'artistic_2',
+	PREREQ_PM	=> {		
 		'Mango'		   => '0.17',
 	},
 	BUILD_REQUIRES => {
