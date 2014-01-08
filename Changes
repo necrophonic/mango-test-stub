@@ -1,11 +1,14 @@
-0.01.3 	2014-01-07
+0.02 	2014-01-08
+	- add support for error states
 
-	Minor change to Makefile.PL and move abstract into module
+
+0.01.3 	2014-01-07
+	- minor change to Makefile.PL and move abstract into module
 
 
 0.01  	2013-12-23 0.01
-
-	Currently stubs:
+	- first release
+	- currently stubs:
 		- Collection->insert
 		- Collection->find
 		- Collection->find_one

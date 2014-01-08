@@ -11,7 +11,7 @@ use Test::Mock::Mango;
 my $mango = Mango->new('mongodb://localhost:123456'); # FAKE!
 
 subtest "Blocking syntax" => sub {
-	plan tests => 3;
+	plan tests => 4;
 
 	subtest "Single insert - autogen id" => sub {
 		plan tests => 2;
@@ -58,13 +58,29 @@ subtest "Blocking syntax" => sub {
 		is   ref $oids,  'ARRAY', 	   'Return array as expected';
 		is   $oids->[0], 'ABC9999',    'First known OID returned as expected [ABC9999]';
 		like $oids->[1], qr/^\d{10}$/, 'Second autogen OID returned as expected';
-		is scalar @{$Test::Mock::Mango::data->{collection}}, 9, 'Data inserted';
+		is   scalar @{$Test::Mock::Mango::data->{collection}}, 9, 'Data inserted';
+	};
+
+	subtest "Error state" => sub {
+		plan tests => 3;
+		$Test::Mock::Mango::error = 'oh noes';
+		my $oid = $mango->db('foo')->collection('bar')->insert({
+			_id	 => 'ABC1234',
+			name => 'Ned Flanders',
+			job	 => 'Neigdiddlyabour',
+			dob  => '1942-01-01',
+			hair => 'brown',
+		});
+		is $oid, undef, 'OID undef as expected';
+		is scalar @{$Test::Mock::Mango::data->{collection}}, 9, 'No data inserted';
+		is $Test::Mock::Mango::error, undef, 'Error reset';
 	};
 };
 
 # ------------------------------------------------------------------------------
 
 subtest "Non-blocking syntax" => sub {
+	plan tests => 4;
 	my $mango = Mango->new('mongodb://localhost:123456'); # FAKE!
 
 	subtest "Single insert - autogen id" => sub {
@@ -121,6 +137,25 @@ subtest "Non-blocking syntax" => sub {
 			is   $oids->[0], 'ABC9998',    'First known OID returned as expected [ABC9998]';
 			like $oids->[1], qr/^\d{10}$/, 'Second autogen OID returned as expected';
 			is scalar @{$Test::Mock::Mango::data->{collection}}, 13, 'Data inserted';
+		});		
+	};
+
+	subtest "Error state" => sub {
+		plan tests => 4;
+		$Test::Mock::Mango::error = 'oh noes';
+		$mango->db('foo')->collection('bar')->insert({
+			_id	 => 'ABC1235',
+			name => 'Ned Flanders',
+			job	 => 'Neigdiddlyabour',
+			dob  => '1942-01-01',
+			hair => 'brown',
+		}
+		=> sub {
+			my ($collection, $err, $oid) = @_;
+			is $oid, undef, 'OID undef as expected';
+			is scalar @{$Test::Mock::Mango::data->{collection}}, 13, 'No data inserted';
+			is $err, 'oh noes', 'Error returned';
+			is $Test::Mock::Mango::error, undef, 'Error reset';
 		});		
 	};
 

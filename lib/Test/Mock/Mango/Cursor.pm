@@ -9,8 +9,16 @@ sub new { bless {index=>0}, shift }
 sub all {
 	my ($self, $cb) = @_;
 
-	my $err = ''; # TODO
-	my $docs = $Test::Mock::Mango::data->{collection};
+	my $docs = undef;
+	my $err  = undef;
+
+	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		$docs = $Test::Mock::Mango::data->{collection};
+	}
 
 	return $cb->($self,$err,$docs) if $cb;
 	return $docs;
@@ -22,8 +30,16 @@ sub all {
 sub next {
 	my ($self, $cb) = @_;
 
-	my $err = ''; # TODO
-	my $doc = $Test::Mock::Mango::data->{collection}->[$self->{index}++];
+	my $doc = undef;
+	my $err = undef;
+
+	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		$doc = $Test::Mock::Mango::data->{collection}->[$self->{index}++];	
+	}
 
 	return $cb->($self,$err,$doc) if $cb;
 	return $doc;
@@ -34,8 +50,16 @@ sub next {
 sub count {
 	my ($self,$cb) = @_;
 
-	my $err = ''; # TODO
-	my $count = scalar @{$Test::Mock::Mango::data->{collection}};
+	my $count = undef;
+	my $err   = undef;
+
+	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		$count = scalar @{$Test::Mock::Mango::data->{collection}};
+	}
 
 	return $cb->($self,$err,$count) if $cb;
 	return $count;

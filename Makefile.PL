@@ -8,12 +8,12 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
 	NAME		=> 'Test::Mock::Mango',
-	VERSION		=> '0.01.4',
+	VERSION		=> '0.02',
 	ABSTRACT 	=> 'Simple stubbing for Mango to allow unit tests for code that uses it',
 	AUTHOR		=> 'J Gregory <jgregory@cpan.org>',
 	LICENSE		=> 'artistic_2',
 	PREREQ_PM	=> {		
-		'Mango'		   => '0.17',
+		'Mango' => '0.22',
 	},
 	BUILD_REQUIRES => {
 		"Test::More" 	  => '0.99',
@@ -29,7 +29,7 @@ WriteMakefile(
 		},
 		no_index => {directory => ['t']}
 	},
-	test => { TESTS	=> 't/*.t' },
+	test => { TESTS	=> 't/*.t t/*/*.t' },
 	dist => { COMPRESS => "gzip -9", SUFFIX => "gz" },
 );
 

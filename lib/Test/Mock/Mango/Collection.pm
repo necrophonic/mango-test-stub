@@ -16,8 +16,16 @@ sub aggregate {
 	my $self = shift;
 	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 
-	my $err = ''; # TODO
-	my $docs = $Test::Mock::Mango::data->{collection};
+	my $docs = undef;
+	my $err  = undef;
+
+	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		$docs = $Test::Mock::Mango::data->{collection};
+	}
 
 	return $cb->($self,$err,$docs) if $cb;
 	return $docs;
@@ -33,7 +41,11 @@ sub create {
 	my $self = shift;
 	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 
-	my $err = ''; # TODO
+	my $err = undef;
+	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
 
 	return $cb->($self,$err) if $cb;
 	return;
@@ -49,7 +61,11 @@ sub drop {
 	my $self = shift;
 	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 
-	my $err = ''; # TODO
+	my $err = undef;
+	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
 
 	return $cb->($self,$err) if $cb;
 	return;	
@@ -63,13 +79,19 @@ sub drop {
 #
 sub find_one {
 	my ($self, $query) = (shift,shift);
-
-	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 	
-	# Return the first fake document
-	my $doc = $Test::Mock::Mango::data->{collection}->[0] || undef;
-
-	my $err = ''; # TODO
+	my $cb  = ref $_[-1] eq 'CODE' ? pop : undef;
+	my $doc = undef;
+	my $err = undef;
+	
+	if (defined $Test::Mock::Mango::error) {		
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		# Return the first fake document
+		$doc = $Test::Mock::Mango::data->{collection}->[0] || undef;
+	}
 
 	return $cb->($self, $err, $doc) if $cb;	# Non blocking
 	return $doc;							# Blocking
@@ -96,27 +118,34 @@ sub insert {
 	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
 
 	my $oids 		= [];
-	my $err  		= '';  # TODO
+	my $err  		= undef;
 	my $return_oids = '';
 
-	# Get how many docs we're "inserting" so we can return the right number of oids
-	my $num_docs = 1;
-	if (ref $docs eq 'ARRAY') {
-		$num_docs = scalar @$docs;
-		for (0..$num_docs-1) {
-			push @$oids, $docs->[$_]->{_id} ||= sprintf("%010s", int rand(1000000000));
-			push @{$Test::Mock::Mango::data->{collection}}, $docs->[$_];
-		}
-		$return_oids = $oids;
+	if (defined $Test::Mock::Mango::error) {
+		$return_oids 			  = undef;
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
 	}
 	else {
-		push @$oids, $docs->{_id} ||= sprintf("%010s", int rand(1000000000));
-		push @{$Test::Mock::Mango::data->{collection}}, $docs;
-		$return_oids = $oids->[0];
+		# Get how many docs we're "inserting" so we can return the right number of oids
+		my $num_docs = 1;
+		if (ref $docs eq 'ARRAY') {
+			$num_docs = scalar @$docs;
+			for (0..$num_docs-1) {
+				push @$oids, $docs->[$_]->{_id} ||= sprintf("%010s", int rand(1000000000));
+				push @{$Test::Mock::Mango::data->{collection}}, $docs->[$_];
+			}
+			$return_oids = $oids;
+		}
+		else {
+			push @$oids, $docs->{_id} ||= sprintf("%010s", int rand(1000000000));
+			push @{$Test::Mock::Mango::data->{collection}}, $docs;
+			$return_oids = $oids->[0];
+		}
 	}
-
+	
 	return $cb->($self,$err,$return_oids) if $cb;
-	return $return_oids;
+	return $return_oids;	
 }
 
 1;
