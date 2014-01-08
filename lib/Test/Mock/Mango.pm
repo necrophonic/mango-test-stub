@@ -114,8 +114,19 @@ Returns full name of the fake collection.
 Naively inserts the given doc(s) onto the end of the current fake collection.
 
 Returns an C<oid> for each inserted document. If an C<_id> is specifiec
-in the inserted doc then it is returned, otherwise a random string is
-returned instead.
+in the inserted doc then it is returned, otherwise a new
+L<Mango::BSON::ObjectID> is returned instead.
+
+=head3 update
+
+Doesn't perform a real update. You should set the data state in
+C<$Test::Mock::Mango::data> before making the call to be what
+you expect after the update.
+
+=head3 remove
+
+Doesn't remove anything.
+
 
 
 =head2 Cursor

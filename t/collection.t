@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 
+use strict;
 use Test::More;
 use Mango;
 
@@ -12,6 +13,7 @@ subtest 'Collection' => sub {
 	can_ok $collection, (qw|
 		aggregate create drop
 		find find_one full_name insert
+		update remove
 	|);
 
 };

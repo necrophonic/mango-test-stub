@@ -5,6 +5,7 @@ use strict;
 use warnings;
 
 use Test::Mock::Mango::Cursor;
+use Mango::BSON::ObjectID;
 
 sub new { bless {}, shift }
 
@@ -131,14 +132,14 @@ sub insert {
 		my $num_docs = 1;
 		if (ref $docs eq 'ARRAY') {
 			$num_docs = scalar @$docs;
-			for (0..$num_docs-1) {
-				push @$oids, $docs->[$_]->{_id} ||= sprintf("%010s", int rand(1000000000));
+			for (0..$num_docs-1) {				
+				push @$oids, $docs->[$_]->{_id} // Mango::BSON::ObjectID->new;				
 				push @{$Test::Mock::Mango::data->{collection}}, $docs->[$_];
 			}
 			$return_oids = $oids;
 		}
 		else {
-			push @$oids, $docs->{_id} ||= sprintf("%010s", int rand(1000000000));
+			push @$oids, $docs->{_id} // Mango::BSON::ObjectID->new;
 			push @{$Test::Mock::Mango::data->{collection}}, $docs;
 			$return_oids = $oids->[0];
 		}
@@ -147,6 +148,54 @@ sub insert {
 	return $cb->($self,$err,$return_oids) if $cb;
 	return $return_oids;	
 }
+
+# ------------------------------------------------------------------------------
+
+sub remove {
+	my $self = shift;
+	my $query = ref $_[0] eq 'CODE' ? {} : shift // {};
+  	my $flags = ref $_[0] eq 'CODE' ? {} : shift // {};
+
+  	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
+
+  	my $doc = undef; # TODO What should this return?
+  	my $err = undef;
+
+  	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		
+	}
+
+	return $cb->($self,$err,$doc) if $cb;
+	return $doc;
+}
+
+# ------------------------------------------------------------------------------
+
+sub update {
+	my ($self,$query,$changes) = (shift,shift,shift);
+
+	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
+
+	my $err = undef;
+	my $doc = undef;
+
+	if (defined $Test::Mock::Mango::error) {
+		$err 					  = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		$doc = $changes;		
+	}
+
+	return $cb->($self,$err,$doc) if $cb;
+	return $doc;
+}
+
+# ------------------------------------------------------------------------------
 
 1;
 

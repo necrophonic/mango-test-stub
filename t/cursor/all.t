@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 
-use Test::More tests => 2;
+use strict;
+use Test::More;
 use Mango;
 
 use Test::Mock::Mango;
