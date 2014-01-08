@@ -10,7 +10,7 @@ WriteMakefile(
 	NAME		=> 'Test::Mock::Mango',
 	VERSION		=> '0.01.4',
 	ABSTRACT 	=> 'Simple stubbing for Mango to allow unit tests for code that uses it',
-	AUTHOR		=> 'J Gregory <john@johngregory.me.uk>',
+	AUTHOR		=> 'J Gregory <jgregory@cpan.org>',
 	LICENSE		=> 'artistic_2',
 	PREREQ_PM	=> {		
 		'Mango'		   => '0.17',
