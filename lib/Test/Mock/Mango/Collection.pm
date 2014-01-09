@@ -9,10 +9,8 @@ use Mango::BSON::ObjectID;
 
 sub new {
 	my $class = shift;
-
-	my $name = $_[-1]; pop;
-
-	my $db = shift;
+	my $name  = $_[-1]; pop;
+	my $db    = shift;
 
 	bless {
 		name => $name,

@@ -13,7 +13,7 @@ sub new {
 		name 	=> shift
 	}, $class;
 }
-sub collection { state $collection = Test::Mock::Mango::Collection->new(shift,shift) }
+sub collection { Test::Mock::Mango::Collection->new(shift,shift) }
 
 1;
 
