@@ -7,7 +7,18 @@ use warnings;
 use Test::Mock::Mango::Cursor;
 use Mango::BSON::ObjectID;
 
-sub new { bless {}, shift }
+sub new {
+	my $class = shift;
+
+	my $name = $_[-1]; pop;
+
+	my $db = shift;
+
+	bless {
+		name => $name,
+		db	 => $db||undef,
+	}, $class;
+}
 
 # aggregate
 #
@@ -108,7 +119,14 @@ sub find {
 # ------------------------------------------------------------------------------
 
 sub full_name {
-	return $Test::Mock::Mango::data->{collection_name};	
+	my ($self) = @_;
+	my $db = $self->{db}||{name=>undef};
+
+	my $name = $db->{name};
+	   $name .= $name ? '.' : '';
+	   $name .= $self->{name};
+
+	return $name;
 }
 
 # ------------------------------------------------------------------------------

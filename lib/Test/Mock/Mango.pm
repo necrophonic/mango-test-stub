@@ -19,11 +19,11 @@ $Test::Mock::Mango::n     = undef;
 # then use Test::Spec::Mocks to do our monkey patching.
 if (exists $INC{'Test/Spec.pm'} && Test::Spec->current_context) {
 	use warnings 'redefine';
-	Mango->expects('db')->returns( state $db = Test::Mock::Mango::DB->new);
+	Mango->expects('db')->returns( Test::Mock::Mango::DB->new($_[-1]) );  
 }
 else {
  	no warnings 'redefine';
- 	eval( q|*Mango::db = sub{state $db = Test::Mock::Mango::DB->new}| );
+ 	eval( q|*Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])}| );
 }
 
 1;
