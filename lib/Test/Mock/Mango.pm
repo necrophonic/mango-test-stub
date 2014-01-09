@@ -174,7 +174,7 @@ you perform has succeeded.
 
 However, there are times when you want to do things in the event of a
 failure (e.g. when you attempt to update and the doc to update doesn't exist
-- this differs from an L<error/"TESTING ERROR STATES"> in that nothing
+- this differs from an L</"TESTING ERROR STATES"> in that nothing
 is wrong with the call, and technically the operation has "succeeded" [mongodb
 is funny like that ;) ])
 
