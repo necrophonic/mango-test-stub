@@ -10,9 +10,11 @@ use Test::Mock::Mango;
 my $mango = Mango->new('mongodb://localhost:123456'); # FAKE!
 
 subtest "Blocking syntax" => sub {
+
+	my $doc;
 	
 	subtest "basic call" => sub {
-		my $doc = $mango->db('foo')->collection('bar')->remove({foo=>'bar'});
+		$doc = $mango->db('foo')->collection('bar')->remove({foo=>'bar'});
 		is $doc->{n}, '1', 'docs updated set';
 	};
 
@@ -20,6 +22,18 @@ subtest "Blocking syntax" => sub {
 		$Test::Mock::Mango::error = 'oh noes';
 		$mango->db('foo')->collection('bar')->remove({foo=>'bar'});		
 		is $Test::Mock::Mango::error, undef, 'error reset';
+	};
+
+	subtest "alter n" => sub {
+		$Test::Mock::Mango::n = 0;
+		$doc = $mango->db('foo')->collection('bar')->remove({foo=>'bar'});
+		is $doc->{n}, '0', 'n set as expected';	
+
+		$Test::Mock::Mango::n = 7;
+		$doc = $mango->db('foo')->collection('bar')->remove({foo=>'bar'});
+		is $doc->{n}, '7', 'n set as expected';	
+
+		is $Test::Mock::Mango::n, undef, 'n has been reset';
 	};
 
 	# TODO test support of flags syntax

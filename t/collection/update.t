@@ -13,22 +13,28 @@ subtest "Blocking syntax" => sub {
 	my $doc = undef;
 
 	subtest "basic call" => sub {
-		$doc = $mango->db('foo')->collection('bar')->update(
-			{foo=>'bar'},
-			{foo=>'baz'}
-		);
-		is $doc->{foo}, 'baz', 'updated doc';
-		is $doc->{n},	1,	   'number of docs updated set';		
+		$doc = $mango->db('foo')->collection('bar')->update({a=>1},{a=>2});
+		is $doc->{a}, '2', 'updated doc';
+		is $doc->{n},  1,  'number of docs updated set';		
 	};
 
 	subtest "error state" => sub {
 		$Test::Mock::Mango::error = 'oh noes';
-		$doc = $mango->db('foo')->collection('bar')->update(
-			{foo=>'bar'},
-			{foo=>'baz'}
-		);
+		$doc = $mango->db('foo')->collection('bar')->update({a=>1},{a=>2});
 		is $doc, undef, 'returns undef as expected';
 		is $Test::Mock::Mango::error, undef, 'error reset';
+	};
+
+	subtest "alter n" => sub {
+		$Test::Mock::Mango::n = 0;
+		$doc = $mango->db('foo')->collection('bar')->update({a=>1},{a=>2});
+		is $doc->{n}, '0', 'n set as expected';	
+
+		$Test::Mock::Mango::n = 7;
+		$doc = $mango->db('foo')->collection('bar')->update({a=>1},{a=>2});
+		is $doc->{n}, '7', 'n set as expected';	
+
+		is $Test::Mock::Mango::n, undef, 'n has been reset';
 	};
 };
 
