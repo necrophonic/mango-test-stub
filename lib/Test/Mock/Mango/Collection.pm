@@ -166,7 +166,7 @@ sub remove {
 		$Test::Mock::Mango::error = undef;
 	}
 	else {
-		
+		$doc->{n} = 1;
 	}
 
 	return $cb->($self,$err,$doc) if $cb;
@@ -188,7 +188,8 @@ sub update {
 		$Test::Mock::Mango::error = undef;
 	}
 	else {
-		$doc = $changes;		
+		$doc = $changes;	
+		$doc->{n} = 1; # Set the number of docs updated arbitrarily
 	}
 
 	return $cb->($self,$err,$doc) if $cb;

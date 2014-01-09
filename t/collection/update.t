@@ -17,7 +17,8 @@ subtest "Blocking syntax" => sub {
 			{foo=>'bar'},
 			{foo=>'baz'}
 		);
-		is_deeply $doc, {foo=>'baz'}, 'returns doc ok';
+		is $doc->{foo}, 'baz', 'updated doc';
+		is $doc->{n},	1,	   'number of docs updated set';		
 	};
 
 	subtest "error state" => sub {
@@ -40,7 +41,8 @@ subtest "Non-blocking syntax" => sub {
 			{foo=>'baz'}
 			=> sub {
 				my ($collection, $err, $doc) = @_;
-				is_deeply $doc, {foo=>'baz'}, 'returns doc ok';
+				is $doc->{foo}, 'baz', 'updated doc';
+				is $doc->{n},	1,	   'number of docs updated set';
 				is $err, undef, 'no error returned';
 			}
 		);

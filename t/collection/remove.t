@@ -12,8 +12,8 @@ my $mango = Mango->new('mongodb://localhost:123456'); # FAKE!
 subtest "Blocking syntax" => sub {
 	
 	subtest "basic call" => sub {
-		lives_ok {$mango->db('foo')->collection('bar')->remove({foo=>'bar'})}
-				 'runs without error';
+		my $doc = $mango->db('foo')->collection('bar')->remove({foo=>'bar'});
+		is $doc->{n}, '1', 'docs updated set';
 	};
 
 	subtest "error state" => sub {
@@ -31,6 +31,7 @@ subtest "Non-blocking syntax" => sub {
 	subtest "basic call" => sub {
 		$mango->db('foo')->collection('bar')->remove( {foo=>'bar'} => sub {			
 			my ($collection, $err, $doc) = @_;			
+			is $doc->{n}, '1', 'docs updated set';
 			is $err, undef, 'no error returned';
 		});
 	};
