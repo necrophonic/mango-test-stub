@@ -30,7 +30,7 @@ sub aggregate {
 	my $err  = undef;
 
 	if (defined $Test::Mock::Mango::error) {
-		$err 					  = $Test::Mock::Mango::error;
+		$err                      = $Test::Mock::Mango::error;
 		$Test::Mock::Mango::error = undef;
 	}
 	else {
