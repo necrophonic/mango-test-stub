@@ -4,6 +4,8 @@ use v5.10;
 use strict;
 use warnings;
 
+our $VERSION = '0.03';
+
 sub new { bless {index=>0}, shift }
 
 sub all {
@@ -13,7 +15,7 @@ sub all {
 	my $err  = undef;
 
 	if (defined $Test::Mock::Mango::error) {
-		$err 					  = $Test::Mock::Mango::error;
+		$err                      = $Test::Mock::Mango::error;
 		$Test::Mock::Mango::error = undef;
 	}
 	else {
@@ -34,7 +36,7 @@ sub next {
 	my $err = undef;
 
 	if (defined $Test::Mock::Mango::error) {
-		$err 					  = $Test::Mock::Mango::error;
+		$err                      = $Test::Mock::Mango::error;
 		$Test::Mock::Mango::error = undef;
 	}
 	else {
@@ -54,7 +56,7 @@ sub count {
 	my $err   = undef;
 
 	if (defined $Test::Mock::Mango::error) {
-		$err 					  = $Test::Mock::Mango::error;
+		$err                      = $Test::Mock::Mango::error;
 		$Test::Mock::Mango::error = undef;
 	}
 	else {
