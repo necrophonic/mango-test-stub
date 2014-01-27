@@ -1,3 +1,7 @@
+0.05	2014-XX-XX
+	- simple stub for Database->command
+
+
 0.04	2014-01-11
 	- support for magic "n" in return docs for update and remove
 	- fix full_name to return db.collection as expected from call
