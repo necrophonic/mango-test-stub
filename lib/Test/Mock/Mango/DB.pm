@@ -17,6 +17,25 @@ sub new {
 }
 sub collection { Test::Mock::Mango::Collection->new(shift,shift) }
 
+# ------------------------------------------------------------------------------
+
+# Just return undef
+#
+sub command {
+	my ($self, $command) = (shift,shift);
+	my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
+
+	my $err = undef;
+
+	if (defined $Test::Mock::Mango::error) {
+		$err                      = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}	
+
+	return $cb->($self, $err, undef) if $cb; # Non blocking
+	return undef;                            # Blocking
+}
+
 1;
 
 =encoding utf8
