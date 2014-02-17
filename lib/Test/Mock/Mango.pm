@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 require 'Mango.pm'; # Bit useless if you don't actually have mango
 use Test::Mock::Mango::FakeData;
@@ -62,10 +62,16 @@ Test::Mock::Mango - Simple stubbing for Mango to allow unit tests for code that 
 
 =head1 DESCRIPTION
 
-Simple stubbing of mango methods. Methods ignore actual queries being entered and
-simply return the data set in the FakeData object. To run a test you need to set
+L<Test::Mock::Mango> provides simple stubbing of methods in the L<Mango> library
+to allow easier unit testing of L<Mango> based code.
+
+It does not attempt to 100% replicate the functionality of L<Mango>, but instead
+aims to provide "just enough" where sensible for the majority of use cases.
+
+The stubbed methods ignore actual queries being entered and
+simply return a user-defined I<known data set>. To run a test you need to set
 up the data you expect back first - this module doesn't test your queries, it allows
-you to test around mango calls with known conditions.
+you to test around L<Mango> calls with known conditions.
 
 
 =head1 STUBBED METHODS
@@ -78,41 +84,50 @@ method does. Non-blocking ops are not actually non blocking but simply
 execute your callback straight away as there's nothing to actually go off
 and do on an event loop.
 
-All methhods by default execute without error state.
+All methods by default simuluate execution without errors. If you want to run a test
+that needs to respond to an error state you can do so by L<setting the error flag/"Testing error states">.
 
 
 =head2 Collection
 
 L<Test::Mock::Mango::Collection>
 
-=head3 aggregate
+=over 9
+
+=item aggregate
 
 Ignores query. Returns current collection documents to simulate an
 aggregated result.
 
-=head3 create
+=item create
 
 Doesn't really do anything.
 
-=head3 drop
+=item drop
 
 Doesn't really do anything.
 
-=head3 find_one
+=item find_one
 
 Ignores query. Returns the first document from the current fake collection
 given in L<Test::Mock::Mango::FakeData>. Returns undef if the collection
 is empty.
 
-=head3 find
+=item find_and_modify
+
+Ignores query. Returns the first document from the current fake collection
+given in L<Test::Mock::Mango::FakeData>. Returns undef if the collection
+is empty.
+
+=item find
 
 Ignores query. Returns a new L<Test::Mock::Mango::Cursor> instance.
 
-=head3 full_name
+=item full_name
 
 Returns full name of the fake collection.
 
-=head3 insert
+=item insert
 
 Naively inserts the given doc(s) onto the end of the current fake collection.
 
@@ -120,39 +135,44 @@ Returns an C<oid> for each inserted document. If an C<_id> is specifiec
 in the inserted doc then it is returned, otherwise a new
 L<Mango::BSON::ObjectID> is returned instead.
 
-=head3 update
+=item update
 
 Doesn't perform a real update. You should set the data state in
 C<$Test::Mock::Mango::data> before making the call to be what
 you expect after the update.
 
-=head3 remove
+=item remove
 
 Doesn't remove anything.
 
+=back
 
 
 =head2 Cursor
 
 L<Test::Mock::Mango::Cursor>
 
-=head3 all
+=over 4
+
+=item all
 
 Return array ref containing all the documents in the current fake collection.
 
-=head3 next
+=item next
 
 Simulates a cursor by (beginning at zero) iterating through each document
 on successive calls. Won't reset itself. If you want to reset the
 cursor then set C<Test::Mock::Mango->index> to zero.
 
-=head3 count
+=item count
 
 Returns the number of documents in the current fake collection.
 
-=head3 backlog
+=item backlog
 
 Arbitarily returns 'C<2>'
+
+=back
 
 
 =head1 TESTING ERROR STATES

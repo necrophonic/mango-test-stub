@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use Test::Mock::Mango::Cursor;
 use Mango::BSON::ObjectID;
@@ -228,6 +228,28 @@ sub update {
 
 	return $cb->($self,$err,$doc) if $cb;
 	return $doc;
+}
+
+# ------------------------------------------------------------------------------
+
+sub find_and_modify {
+	my ($self, $opts) = (shift,shift);
+	
+	my $cb  = ref $_[-1] eq 'CODE' ? pop : undef;
+	my $doc = undef;
+	my $err = undef;
+	
+	if (defined $Test::Mock::Mango::error) {		
+		$err                      = $Test::Mock::Mango::error;
+		$Test::Mock::Mango::error = undef;
+	}
+	else {
+		# Return the first fake document
+		$doc = $Test::Mock::Mango::data->{collection}->[0] || undef;
+	}
+
+	return $cb->($self, $err, $doc) if $cb;	# Non blocking
+	return $doc;							# Blocking
 }
 
 # ------------------------------------------------------------------------------
