@@ -33,7 +33,8 @@ if (exists $INC{'Test/Spec.pm'} && Test::Spec->current_context) {
 }
 else {
     no warnings 'redefine';
-    eval( q|*Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])}| );
+    #eval( q|*Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])}| );
+    *Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])};
 }
 
 
