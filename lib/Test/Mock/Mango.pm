@@ -15,6 +15,16 @@ $Test::Mock::Mango::data  = Test::Mock::Mango::FakeData->new;
 $Test::Mock::Mango::error = undef;
 $Test::Mock::Mango::n     = undef;
 
+
+# Stub "Mango" itself to deal with the situations where it'll get
+# a duff or unset connection string (if for example the context in
+# which the code will run requires a config file but the unit test
+# will run where this file doesn't exist).
+{
+    no warnings 'redefine';
+    *Mango::new = sub { bless {}, 'Mango' };
+}
+
 # If we're running with Test::Spec and in appropriate context
 # then use Test::Spec::Mocks to do our monkey patching.
 if (exists $INC{'Test/Spec.pm'} && Test::Spec->current_context) {
@@ -23,7 +33,8 @@ if (exists $INC{'Test/Spec.pm'} && Test::Spec->current_context) {
 }
 else {
     no warnings 'redefine';
-    eval( q|*Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])}| );
+    #eval( q|*Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])}| );
+    *Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])};
 }
 
 
