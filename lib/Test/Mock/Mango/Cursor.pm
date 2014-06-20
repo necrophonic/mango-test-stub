@@ -28,6 +28,11 @@ sub all {
 
 # ------------------------------------------------------------------------------
 
+# Naive no-op. Just return the parent so it can chain.
+sub limit { shift }
+
+# ------------------------------------------------------------------------------
+
 # Naive "next" - simply iterate through the docs in the defined test data
 sub next {
 	my ($self, $cb) = @_;

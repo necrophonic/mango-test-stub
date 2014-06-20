@@ -1,3 +1,9 @@
+0.07    2014-07-20
+    - adds stubbed "limit" support for Mango::Cursor
+
+0.06    2014-06-19
+    - stubs Mango::new to avoid duff connection string issues (#5)
+
 0.05	2014-02-17
 	- add stubs for:
 		- Collection->find_and_modify
