@@ -30,6 +30,7 @@ sub all {
 
 # Naive no-op. Just return the parent so it can chain.
 sub limit { shift }
+sub sort { shift }
 
 # ------------------------------------------------------------------------------
 
