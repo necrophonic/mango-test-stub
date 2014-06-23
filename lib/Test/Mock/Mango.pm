@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 require 'Mango.pm'; # Bit useless if you don't actually have mango
 use Test::Mock::Mango::FakeData;
@@ -163,7 +163,7 @@ Doesn't remove anything.
 
 L<Test::Mock::Mango::Cursor>
 
-=over 4
+=over 6
 
 =item all
 
@@ -182,6 +182,14 @@ Returns the number of documents in the current fake collection.
 =item backlog
 
 Arbitarily returns 'C<2>'
+
+=item limit
+
+Passthru
+
+=item sort
+
+Passthru
 
 =back
 
