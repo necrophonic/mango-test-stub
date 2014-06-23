@@ -73,6 +73,8 @@ Test::Mock::Mango - Simple stubbing for Mango to allow unit tests for code that 
 
 =head1 DESCRIPTION
 
+For L<Mango> version 0.43
+
 L<Test::Mock::Mango> provides simple stubbing of methods in the L<Mango> library
 to allow easier unit testing of L<Mango> based code.
 
