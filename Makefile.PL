@@ -13,7 +13,7 @@ WriteMakefile(
 	AUTHOR		=> 'J Gregory <jgregory@cpan.org>',
 	LICENSE		=> 'artistic_2',
 	PREREQ_PM	=> {		
-		'Mango' => '0.22',		
+		'Mango' => '0.43',		
 	},
 	BUILD_REQUIRES => {
 		"Test::More" 	  => '0.99',
