@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '0.08.2';
+our $VERSION = '0.09';
 
 require 'Mango.pm'; # Bit useless if you don't actually have mango
 use Test::Mock::Mango::FakeData;
@@ -33,7 +33,6 @@ if (exists $INC{'Test/Spec.pm'} && Test::Spec->current_context) {
 }
 else {
     no warnings 'redefine';
-    #eval( q|*Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])}| );
     *Mango::db = sub{Test::Mock::Mango::DB->new($_[-1])};
 }
 
@@ -73,7 +72,7 @@ Test::Mock::Mango - Simple stubbing for Mango to allow unit tests for code that 
 
 =head1 DESCRIPTION
 
-For L<Mango> version 0.43
+For L<Mango> version 0.30 and higher
 
 L<Test::Mock::Mango> provides simple stubbing of methods in the L<Mango> library
 to allow easier unit testing of L<Mango> based code.
