@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '0.08';
+our $VERSION = '0.08.1';
 
 require 'Mango.pm'; # Bit useless if you don't actually have mango
 use Test::Mock::Mango::FakeData;
@@ -72,6 +72,8 @@ Test::Mock::Mango - Simple stubbing for Mango to allow unit tests for code that 
 
 
 =head1 DESCRIPTION
+
+For L<Mango> version 0.43
 
 L<Test::Mock::Mango> provides simple stubbing of methods in the L<Mango> library
 to allow easier unit testing of L<Mango> based code.
