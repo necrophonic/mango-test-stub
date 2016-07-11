@@ -18,4 +18,4 @@ nytprof.out
 pm_to_blib
 *.gz
 nytprof/
-
+*.tar

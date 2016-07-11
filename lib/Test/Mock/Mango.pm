@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 require 'Mango.pm'; # Bit useless if you don't actually have mango
 use Test::Mock::Mango::FakeData;
@@ -29,7 +29,7 @@ $Test::Mock::Mango::n     = undef;
 # then use Test::Spec::Mocks to do our monkey patching.
 if (exists $INC{'Test/Spec.pm'} && Test::Spec->current_context) {
     use warnings 'redefine';
-    Mango->expects('db')->returns( Test::Mock::Mango::DB->new($_[-1]) );  
+    Mango->expects('db')->returns( Test::Mock::Mango::DB->new($_[-1]) );
 }
 else {
     no warnings 'redefine';
